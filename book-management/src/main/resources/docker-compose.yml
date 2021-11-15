@@ -1,0 +1,19 @@
+
+version: "3"
+services:
+  mybookdb:
+    networks:
+      - backend
+    image: mongo:latest
+    container_name: mybookdb
+    ports:
+      - 27017:27017
+  book-app-image:
+    networks:
+      - backend
+    image: sageal/springboot-book-mongodbs:1.4
+    container_name: springboot-book-mongodbs
+    ports:
+      - 8080:8080
+    links:
+      - mybookdb
